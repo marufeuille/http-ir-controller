@@ -1,4 +1,6 @@
 build/
 main/
+tmp/
 .vscode/
 .env
+conf.h

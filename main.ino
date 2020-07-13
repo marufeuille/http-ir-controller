@@ -1,22 +1,14 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
-
-#ifdef WIFI_SSID
-const char *WIFI_SSID = WIFI_SSID;
-#else
-const char *WIFI_SSID = "MYWIFI_SSID";
-#endif
-
-#ifdef WIFI_PASSWD
-const char *WIFI_PASSWD = WIFI_PASSWD;
-#else
-const char *WIFI_PASSWD = "MYWIFI_PASSWD";
-#endif
-
-#define WIFI_PWD "ishii5261"
+#include <EEPROM.h>
 
 #define N 2000 // 最大5000程度が目安 in ESP-WROOM-02
 #define IRPIN 5
+
+struct CONFIG {
+  char ssid[32];
+  char pass[32];
+};
 
 ESP8266WebServer server(80);
 
@@ -30,8 +22,15 @@ ESP8266WebServer server(80);
 void setup() {
   
   Serial.begin(115200);
+  EEPROM.begin(100);
+  CONFIG buf;
+  EEPROM.get<CONFIG>(0, buf);
+  Serial.print("WIFI_SSID: "); 
+  Serial.println(buf.ssid);
+  Serial.print("WIFI_PASSWD: "); 
+  Serial.println(buf.pass);
 
-  WiFi.begin(WIFI_SSID, WIFI_PWD);
+  WiFi.begin(buf.ssid, buf.pass);
 
   // Wait until WiFi is connected
   Serial.println("");
