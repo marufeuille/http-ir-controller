@@ -11,5 +11,5 @@ all:
 
 write-conf:
 	mkdir -p ./tmp
-	cat template/save_config.ino | sed 's/^\/\/REPLACE_SSID/  strcpy(buf.ssid, \"$(WIFI_SSID)\");/' | sed 's/^\/\/REPLACE_PASSWD/  strcpy(buf.pass, \"$(WIFI_PASSWD)\");/' > ./tmp/save_config.ino > ./tmp/save_config.ino
+	cat template/save_config.ino | sed 's/^\/\/REPLACE_SSID/  strcpy(buf.ssid, \"$(WIFI_SSID)\");/' | sed 's/^\/\/REPLACE_PASSWD/  strcpy(buf.pass, \"$(WIFI_PASSWD)\");/' > ./tmp/save_config.ino 
 	$(ARDUINO) --pref build.path=$(BUILD_DIR) --board $(BOARD) --port $(PORT) --upload ./tmp/save_config.ino
