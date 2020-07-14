@@ -4,10 +4,6 @@
 
 #include <EEPROM.h>
 
-#include <IRremoteESP8266.h>
-#include <IRsend.h>
-
-#define N 2000 // 最大5000程度が目安 in ESP-WROOM-02
 #define IRPIN 5
 #define IRLEDPIN 14
 
@@ -130,6 +126,8 @@ void setup() {
 void loop() {
   server.handleClient();
 }
+
+// https://github.com/SWITCHSCIENCE/samplecodes/tree/master/ESPr-IR/ESPrIR_sender
 void sendIRData(unsigned int  *data, int dataSize)
 {
   unsigned int i=0,power=HIGH;
